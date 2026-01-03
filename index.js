@@ -2,32 +2,17 @@ const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const {userRouter} = require('./routes/user');
+const {courseRouter} = require('./routes/course');
 
-app.post("/userSignup",(req,res)=>{
-    
-});
+app.use("/user",userRouter);
+app.use('/course',courseRouter);
 
-app.post("/userLogin",(req,res)=>{
-
-});
-
-app.post("/purchaseCourse",(req,res)=>{
+app.post("/admin/signup",(req,res)=>{
 
 });
 
-app.post("/seeAllCourses",(req,res)=>{
-
-});
-
-app.post("/seePurchasedCourse",(req,res)=>{
-
-});
-
-app.post("/adminSignup",(req,res)=>{
-
-});
-
-app.post("/adminLogin",(req,res)=>{
+app.post("/admin/login",(req,res)=>{
 
 });
 
