@@ -12,6 +12,6 @@ courseRouter.get("/preview",(req,res)=>{
 
 });
 
-module.exports({
+module.exports = {
     courseRouter: courseRouter
-});
+};
