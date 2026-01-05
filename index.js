@@ -8,22 +8,4 @@ const {courseRouter} = require('./routes/course');
 app.use("/user",userRouter);
 app.use('/course',courseRouter);
 
-app.post("/admin/signup",(req,res)=>{
-
-});
-
-app.post("/admin/login",(req,res)=>{
-
-});
-
-app.post("/createCourse",(req,res)=>{
-
-});
-
-app.post("/deleteCourse",(req,res)=>{
-
-});
-
-app.post("/addContentToCourse",(req,res)=>{
-
-});
+app.listen(3000);
