@@ -13,10 +13,21 @@ userRouter.post("/signin",(req,res)=>{
 
 });
 
-//For user to see all the purchased courses
-userRouter.get("/purchases",(req,res)=>{
+//For admin to post new courses
+userRouter.post("/course",(req,res)=>{
 
 });
+
+//For admin to see all their courses
+userRouter.get("/yourCourses",(req,res)=>{
+
+});
+
+//For admin to make change to their courses
+userRouter.put("/course",(req,res)=>{
+
+});
+
 
 module.exports = {
     userRouter: userRouter
