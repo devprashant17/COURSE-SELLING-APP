@@ -1,7 +1,5 @@
 const express = require('express');
-const Router = express.Router;            //const {Router}=require('express')
-
-const userRouter = Router();
+const userRouter = express.Router();            //const {Router}=require('express')
 
 userRouter.post("/signup",(req,res)=>{         // /user/signup laai handle garxa
     res.json({

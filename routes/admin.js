@@ -1,4 +1,6 @@
-const {adminRouter} = require('express');
+const express = require('express');
+const adminRouter = express.Router();
+const {adminModel} = require('../db');
 
 adminRouter.post("/signup",(req,res)=>{         // /user/signup laai handle garxa
     res.json({
@@ -11,17 +13,17 @@ adminRouter.post("/signin",(req,res)=>{
 });
 
 //For admin to see all their courses
-userRouter.get("/courses",(req,res)=>{
+adminRouter.get("/courses",(req,res)=>{
 
 });
 
 //For admin to make change to their courses
-userRouter.put("/course",(req,res)=>{
+adminRouter.put("/course",(req,res)=>{
 
 });
 
 //For admin to delete their courses
-userRouter.delete("/course",(req,res)=>{
+adminRouter.delete("/course",(req,res)=>{
 
 });
 
