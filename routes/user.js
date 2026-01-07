@@ -3,7 +3,7 @@ const userRouter = express.Router();            //const {Router}=require('expres
 
 userRouter.post("/signup",(req,res)=>{         // /user/signup laai handle garxa
     res.json({
-        msg: "SIGNED UP!"
+        msg: "SIGNED UPPP!"
     })
 });
 

@@ -7,9 +7,6 @@ const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
 
-
-
-
 const mongoose = require('mongoose');
 
 const {userRouter} = require('./routes/user');
