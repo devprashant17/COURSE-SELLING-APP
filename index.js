@@ -1,13 +1,16 @@
 require('dotenv').config();
 const dbUrl = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
-const JWT_SECRET = process.env.JWT_SECRET;
+  
+const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD;
 
 const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
+
+app.use(express.json());
 
 const {userRouter} = require('./routes/user');
 const {courseRouter} = require('./routes/course');
