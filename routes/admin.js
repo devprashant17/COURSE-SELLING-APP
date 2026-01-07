@@ -3,6 +3,8 @@ const adminRouter = express.Router();
 const {adminModel} = require('../db');
 const jwt = require('jsonwebtoken');
 const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD; 
+const bcrypt = require('bcrypt');
+const {z} = require('zod');
 
 
 
