@@ -112,8 +112,22 @@ adminRouter.post("/course",adminMiddleware,async (req,res)=>{
 });
 
 //For admin to make change to their courses
-adminRouter.put("/course",(req,res)=>{
+adminRouter.put("/course",adminMiddleware, async (req,res)=>{
+    const adminId = req.userId;
+    const { title,description,price,imageUrl } = req.body;
 
+    const course = await courseModel.create({
+        title: title,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
+        creatorId: adminId
+    });
+
+    res.json({
+       msg:"Course created",
+       courseId: course._id
+    })
 });
 
 //For admin to delete their courses
