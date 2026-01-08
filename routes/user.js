@@ -2,6 +2,8 @@ const express = require('express');
 const userRouter = express.Router();            //const {Router}=require('express')
 const bcrypt = require('bcrypt');
 const {z} = require('zod');
+const { purchasesModel } = require('../db');
+const { userMiddleware } = require('../middleware/user');
 
 const jwt = require('jsonwebtoken');
 const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD;  
@@ -89,11 +91,18 @@ userRouter.post("/signin",async (req,res)=>{
     }
 });
 
-//For user to see their purchased courses
-userRouter.get("/purchases",(req,res)=>{
+//For users to see all the purchased courses
+userRouter.get("/preview",userMiddleware,async (req,res)=>{
+    const userId = req.userId;
 
+    const purchases  = await purchasesModel.find({
+        userId: userId
+    });
+
+    res.json({
+        purchases
+    });
 });
-
 
 module.exports = {
     userRouter: userRouter
