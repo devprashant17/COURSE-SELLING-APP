@@ -7,6 +7,8 @@ const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD;
 const bcrypt = require('bcrypt');
 const {z} = require('zod');
 const { adminMiddleware } = require('../middleware/admin');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.ObjectId;
 
 
 
@@ -148,7 +150,23 @@ adminRouter.get("/course/bulk",adminMiddleware, async (req,res)=>{
 });
 
 //For admin to delete their courses
-adminRouter.delete("/course",(req,res)=>{
+adminRouter.delete("/course",adminMiddleware,async (req,res)=>{
+    const adminId = req.userId;
+    const courseId = req.body.courseId;
+
+    if (!courseId) {
+        return res.status(400).json({ msg: "Course ID is required" });
+    }
+    
+    const result = await courseModel.deleteOne({
+        _id: courseId,
+        creatorId: adminId
+    });
+
+    return res.json({
+      msg: "Course deleted successfully",
+      courseId
+    });
 
 });
 
