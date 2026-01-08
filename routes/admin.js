@@ -114,19 +114,36 @@ adminRouter.post("/course",adminMiddleware,async (req,res)=>{
 //For admin to make change to their courses
 adminRouter.put("/course",adminMiddleware, async (req,res)=>{
     const adminId = req.userId;
-    const { title,description,price,imageUrl } = req.body;
+    const { title,description,price,imageUrl,courseId } = req.body;
 
-    const course = await courseModel.create({
+    const course = await courseModel.updateOne({
+        _id:courseId,
+        creatorId: adminId
+        },
+        {$set:{
         title: title,
         description: description,
         price: price,
-        imageUrl: imageUrl,
+        imageUrl: imageUrl
+        }
+    });
+
+    res.json({
+       msg:"Course updated",
+       courseId: courseId
+    })
+});
+
+// For admin to get all their courses
+adminRouter.get("/course/bulk",adminMiddleware, async (req,res)=>{
+    const adminId = req.userId;
+
+    const courses = await courseModel.find({
         creatorId: adminId
     });
 
     res.json({
-       msg:"Course created",
-       courseId: course._id
+       courses: courses
     })
 });
 
