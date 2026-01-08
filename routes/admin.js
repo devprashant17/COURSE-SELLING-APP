@@ -1,10 +1,13 @@
 const express = require('express');
 const adminRouter = express.Router();
 const {adminModel} = require('../db');
+const {courseModel} = require('../db');
 const jwt = require('jsonwebtoken');
 const JWT_ADMIN_PASSWORD = process.env.JWT_ADMIN_PASSWORD; 
 const bcrypt = require('bcrypt');
 const {z} = require('zod');
+const { adminMiddleware } = require('../middleware/admin');
+
 
 
 
@@ -89,9 +92,23 @@ adminRouter.post("/signin",async (req,res)=>{
     }
 });
 
-//For admin to see all their courses
-adminRouter.get("/courses",(req,res)=>{
+//For admin to create their course
+adminRouter.post("/course",adminMiddleware,async (req,res)=>{
+    const adminId = req.userId;
+    const { title,description,price,imageUrl } = req.body;
 
+    const course = await courseModel.create({
+        title: title,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
+        creatorId: adminId
+    });
+
+    res.json({
+       msg:"Course created",
+       courseId: course._id
+    })
 });
 
 //For admin to make change to their courses
