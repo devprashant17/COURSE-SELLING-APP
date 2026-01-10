@@ -10,9 +10,6 @@ const { adminMiddleware } = require('../middleware/admin');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.ObjectId;
 
-
-
-
 adminRouter.post("/signup",async (req,res)=>{           // /admin/signup laai handle garxa    
     const requiredBody = z.object({
         email: z.string().trim().email("Invalid email"),
